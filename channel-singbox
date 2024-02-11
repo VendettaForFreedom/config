@@ -177,8 +177,8 @@
       "tag": "A4",
       "type": "hysteria2"
     },
-    {
-      "server": "95.217.211.216",
+    {        
+	  "server": "95.217.211.216",
       "server_port": 443,
       "tls": {
         "enabled": true,
