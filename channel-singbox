@@ -178,31 +178,31 @@
       "type": "hysteria2"
     },
     {        
-	  "server": "95.217.211.216",
+	  "server": "147.45.76.180",
       "server_port": 443,
       "tls": {
         "enabled": true,
         "insecure": true
       },
-      "password": "536a1e178ea00bf2",
+      "password": "d209a78e3272cbeb",
       "obfs": {
         "type": "salamander",
-        "password": "05462d067f21387c"
+        "password": "b1752cdc49b48a29"
       },
       "tag": "A5",
       "type": "hysteria2"
     },
 	{
-      "server": "[2a01:4f9:c012:c3fd::1]",
+      "server": "[2a12:5940:431d::2]",
       "server_port": 443,
       "tls": {
         "enabled": true,
         "insecure": true
       },
-      "password": "536a1e178ea00bf2",
+      "password": "d209a78e3272cbeb",
       "obfs": {
         "type": "salamander",
-        "password": "05462d067f21387c"
+        "password": "b1752cdc49b48a29"
       },
       "tag": "A6",
       "type": "hysteria2"
