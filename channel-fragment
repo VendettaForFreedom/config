@@ -67,11 +67,11 @@
         ]
       },
       "streamSettings": {
-        "network": "ws",
+        "network": "grpc",
         "security": "tls",
         "tlsSettings": {
           "allowInsecure": false,
-          "serverName": "FrAgmeNT.kArOp.HOMes",
+          "serverName": "fRaGmeNT.KARop.hoMES",
           "alpn": [
             "h2",
             "http/1.1"
@@ -79,11 +79,9 @@
           "fingerprint": "chrome",
           "show": false
         },
-        "wsSettings": {
-          "path": "/freehomesvpn",
-          "headers": {
-            "Host": "FrAgmeNT.kArOp.HOMes"
-          }
+        "grpcSettings": {
+          "multiMode": false,
+          "serviceName": "fragment"
         },
         "sockopt": {
           "dialerProxy": "fragment",
