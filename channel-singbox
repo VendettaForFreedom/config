@@ -80,11 +80,7 @@
         "A1",
         "A2",
         "A3",
-		"A4",
-		"A5",
-		"A6",
-		"A7",
-		"A8"
+		"A4"
       ]
     },
     {
@@ -94,11 +90,7 @@
         "A1",
         "A2",
         "A3",
-		"A4",
-		"A5",
-		"A6",
-		"A7",
-		"A8"
+		"A4"
       ],
       "url": "https://www.gstatic.com/generate_204",
       "interval": "1m",
@@ -147,37 +139,7 @@
       "tag": "A2",
       "type": "hysteria2"
     },
-    {
-      "server": "51.222.12.75",
-      "server_port": 443,
-      "tls": {
-        "enabled": true,
-        "insecure": true
-      },
-      "password": "2f1b122607f533dc",
-      "obfs": {
-        "type": "salamander",
-        "password": "7925a5b3071cb35f"
-      },
-      "tag": "A3",
-      "type": "hysteria2"
-    },
-	{
-      "server": "[2607:5300:205:200::1926]",
-      "server_port": 443,
-      "tls": {
-        "enabled": true, 
-        "insecure": true
-      },
-      "password": "2f1b122607f533dc",
-      "obfs": {
-             "type": "salamander",
-        "password": "7925a5b3071cb35f"
-      },
-      "tag": "A4",
-      "type": "hysteria2"
-    },
-    {        
+        {        
 	  "server": "147.45.76.180",
       "server_port": 443,
       "tls": {
@@ -189,7 +151,7 @@
         "type": "salamander",
         "password": "b1752cdc49b48a29"
       },
-      "tag": "A5",
+      "tag": "A3",
       "type": "hysteria2"
     },
 	{
@@ -204,37 +166,7 @@
         "type": "salamander",
         "password": "b1752cdc49b48a29"
       },
-      "tag": "A6",
-      "type": "hysteria2"
-    },
-	{
-      "server": "147.45.76.116",
-      "server_port": 443,
-      "tls": {
-        "enabled": true,
-        "insecure": true
-      },
-      "password": "7929508208061157",
-      "obfs": {
-        "type": "salamander",
-        "password": "6cc525a9a7a2eb6c"
-      },
-      "tag": "A7",
-      "type": "hysteria2"
-    },
-	{
-      "server": "[2a12:5940:42d8::2]",
-      "server_port": 443,
-      "tls": {
-        "enabled": true,
-        "insecure": true
-      },
-      "password": "7929508208061157",
-      "obfs": {
-        "type": "salamander",
-        "password": "6cc525a9a7a2eb6c"
-      },
-      "tag": "A8",
+      "tag": "A4",
       "type": "hysteria2"
     }
   ],
