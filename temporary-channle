@@ -1,0 +1,357 @@
+{
+  "log": {
+    "level": "warn",
+    "output": "box.log",
+    "timestamp": true
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "dns-remote",
+        "address": "udp://185.228.168.9",
+        "address_resolver": "dns-direct"
+      },
+      {
+        "tag": "dns-trick-direct",
+        "address": "https://sky.rethinkdns.com/",
+        "detour": "direct-fragment"
+      },
+      {
+        "tag": "dns-direct",
+        "address": "auto",
+        "address_resolver": "dns-local",
+        "detour": "direct"
+      },
+      {
+        "tag": "dns-local",
+        "address": "local",
+        "detour": "direct"
+      },
+      {
+        "tag": "dns-block",
+        "address": "rcode://success"
+      }
+    ],
+    "rules": [
+      {
+        "domain_suffix": ".ir",
+        "geosite": "ir",
+        "server": "dns-direct"
+      },
+      {
+        "domain": "cp.cloudflare.com",
+        "server": "dns-remote",
+        "rewrite_ttl": 3000
+      }
+    ],
+    "final": "dns-remote",
+    "static_ips": {
+      "sky.rethinkdns.com": [
+        "2a06:98c1:3120::3",
+        "2a06:98c1:3121::3",
+        "188.114.97.3",
+        "188.114.96.3",
+        "104.18.203.232",
+        "104.18.202.232",
+        "2a06:98c1:3120::3",
+        "2a06:98c1:3121::3",
+        "188.114.96.3",
+        "188.114.97.3"
+      ]
+    },
+    "independent_cache": true
+  },
+  "inbounds": [
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "mtu": 9000,
+      "inet4_address": "172.19.0.1/28",
+      "auto_route": true,
+      "strict_route": true,
+      "endpoint_independent_nat": true,
+      "stack": "mixed",
+      "sniff": true,
+      "sniff_override_destination": true
+    },
+    {
+      "type": "mixed",
+      "tag": "mixed-in",
+      "listen": "127.0.0.1",
+      "listen_port": 2334,
+      "sniff": true,
+      "sniff_override_destination": true
+    },
+    {
+      "type": "direct",
+      "tag": "dns-in",
+      "listen": "127.0.0.1",
+      "listen_port": 6450,
+      "override_address": "1.1.1.1",
+      "override_port": 53
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "selector",
+      "tag": "select",
+      "outbounds": [
+        "auto",
+        "هیستریا یک § 0",
+        "هیستریا دو § 1",
+        "هیستریا سه § 2",
+        "هیستریا چهار § 3",
+        "هیستریا پنج § 4",
+        "هیستریا شش § 5",
+        "توییک یک § 6",
+        "توییک دو § 7",
+        "توییک سه § 8"
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "urltest",
+      "tag": "auto",
+      "outbounds": [
+        "هیستریا یک § 0",
+        "هیستریا دو § 1",
+        "هیستریا سه § 2",
+        "هیستریا چهار § 3",
+        "هیستریا پنج § 4",
+        "هیستریا شش § 5",
+        "توییک یک § 6",
+        "توییک دو § 7",
+        "توییک سه § 8"
+      ],
+      "url": "http://cp.cloudflare.com/",
+      "interval": "10m0s",
+      "idle_timeout": "1h40m0s"
+    },
+    {
+      "type": "hysteria2",
+      "tag": "هیستریا یک § 0",
+      "server": "147.45.76.116",
+      "server_port": 443,
+      "obfs": {
+        "type": "salamander",
+        "password": "6cc525a9a7a2eb6c"
+      },
+      "password": "�ݽ�O6��",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.google.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "هیستریا دو § 1",
+      "server": "2a12:5940:42d8::2",
+      "server_port": 443,
+      "obfs": {
+        "type": "salamander",
+        "password": "6cc525a9a7a2eb6c"
+      },
+      "password": "�ݽ�O6��",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.google.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "هیستریا سه § 2",
+      "server": "147.45.76.180",
+      "server_port": 443,
+      "obfs": {
+        "type": "salamander",
+        "password": "b1752cdc49b48a29"
+      },
+      "password": "d209a78e3272cbeb",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.google.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "هیستریا چهار § 3",
+      "server": "2a12:5940:431d::2",
+      "server_port": 443,
+      "obfs": {
+        "type": "salamander",
+        "password": "b1752cdc49b48a29"
+      },
+      "password": "d209a78e3272cbeb",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.google.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "هیستریا پنج § 4",
+      "server": "147.45.76.99",
+      "server_port": 443,
+      "obfs": {
+        "type": "salamander",
+        "password": "2c5ef5135559d4f5"
+      },
+      "password": "cef1e7a47565b431",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.google.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "هیستریا شش § 5",
+      "server": "2a12:5940:42c5::2",
+      "server_port": 443,
+      "obfs": {
+        "type": "salamander",
+        "password": "2c5ef5135559d4f5"
+      },
+      "password": "cef1e7a47565b431",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.google.com",
+        "insecure": true
+      }
+    },
+    {
+      "type": "tuic",
+      "tag": "توییک یک § 6",
+      "server": "2a12:5940:431d::2",
+      "server_port": 29393,
+      "uuid": "c3c8a581-25c3-41a8-95bd-0188f63748b9",
+      "password": "01e584f913b01ca8",
+      "congestion_control": "bbr",
+      "udp_relay_mode": "native",
+      "heartbeat": "10s",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.google.com",
+        "insecure": true,
+        "alpn": [
+          "h3",
+          "spdy/3.1"
+        ]
+      }
+    },
+    {
+      "type": "tuic",
+      "tag": "توییک دو § 7",
+      "server": "2a12:5940:42c5::2",
+      "server_port": 48282,
+      "uuid": "6801db4e-76d9-4a3e-acdc-9ebdd1dd4e86",
+      "password": "c515252362b009f5",
+      "congestion_control": "bbr",
+      "udp_relay_mode": "native",
+      "heartbeat": "10s",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.google.com",
+        "insecure": true,
+        "alpn": [
+          "h3",
+          "spdy/3.1"
+        ]
+      }
+    },
+    {
+      "type": "tuic",
+      "tag": "توییک سه § 8",
+      "server": "2a12:5940:42d8::2",
+      "server_port": 54833,
+      "uuid": "eec22c1c-2e37-4c66-b7a9-41cf43033070",
+      "password": "3e53ddf7839c5112",
+      "congestion_control": "bbr",
+      "udp_relay_mode": "native",
+      "heartbeat": "10s",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.google.com",
+        "insecure": true,
+        "alpn": [
+          "h3",
+          "spdy/3.1"
+        ]
+      }
+    },
+    {
+      "type": "dns",
+      "tag": "dns-out"
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "direct",
+      "tag": "direct-fragment",
+      "tls_fragment": {
+        "enabled": true,
+        "size": "5-10",
+        "sleep": "1-5"
+      }
+    },
+    {
+      "type": "direct",
+      "tag": "bypass"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    }
+  ],
+  "route": {
+    "geoip": {
+      "path": "geo-assets/sagernet-sing-geoip-geoip.db"
+    },
+    "geosite": {
+      "path": "geo-assets/sagernet-sing-geosite-geosite.db"
+    },
+    "rules": [
+      {
+        "inbound": "dns-in",
+        "outbound": "dns-out"
+      },
+      {
+        "port": 53,
+        "outbound": "dns-out"
+      },
+      {
+        "clash_mode": "Direct",
+        "outbound": "direct"
+      },
+      {
+        "clash_mode": "Global",
+        "outbound": "select"
+      },
+      {
+        "domain_suffix": ".ir",
+        "geosite": "ir",
+        "geoip": "ir",
+        "outbound": "bypass"
+      }
+    ],
+    "final": "select",
+    "auto_detect_interface": true,
+    "override_android_vpn": true
+  },
+  "experimental": {
+    "cache_file": {
+      "enabled": true,
+      "path": "clash.db"
+    },
+    "clash_api": {
+      "external_controller": "127.0.0.1:6756",
+      "secret": "Qgowetk5KH-BTUm5"
+    }
+  }
+}
