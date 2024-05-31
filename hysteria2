@@ -1,0 +1,295 @@
+ 
+{
+  "log": {
+    "disabled": false,
+    "level": "info",
+    "timestamp": true
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "proxyDns",
+        "address": "1.1.1.1",
+        "detour": "select"
+      },
+      {
+        "tag": "localDns",
+        "address": "https://223.5.5.5/dns-query",
+        "detour": "direct"
+      },
+      {
+        "tag": "block",
+        "address": "rcode://success"
+      }
+    ],
+    "rules": [
+            {
+                "domain_suffix": [
+                    ".ir"
+                ],
+                "server": "dns-direct"
+            },
+
+      {
+        "server": "localDns",
+        "outbound": "any",
+        "disable_cache": true
+      },
+      {
+        "server": "localDns",
+        "clash_mode": "direct"
+      },
+      {
+        "server": "proxyDns",
+        "clash_mode": "global"
+      }
+
+    ],
+    "strategy": "ipv4_only"
+  },
+  "inbounds": [
+    {
+      "sniff": true,
+      "type": "mixed",
+      "listen": "127.0.0.1",
+      "listen_port": 1081
+    },
+    {
+      "stack": "system",
+      "auto_route": true,
+      "inet4_address": "172.19.0.1/30",
+      "mtu": 9000,
+      "sniff": true,
+      "strict_route": true,
+      "type": "tun",
+      "platform": {
+        "http_proxy": {
+          "enabled": true,
+          "server": "127.0.0.1",
+          "server_port": 1081
+        }
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "select",
+      "type": "selector",
+      "outbounds": [
+        "auto",
+        "A1",
+        "A2",
+        "A3",
+		"A4",
+		"A5",
+		"A6",
+		"A7",
+		"A8"
+      ]
+    },
+    {
+      "tag": "auto",
+      "type": "urltest",
+      "outbounds": [
+        "A1",
+        "A2",
+        "A3",
+		"A4",
+		"A5",
+		"A6",
+		"A7",
+		"A8"
+	  ],
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "1m",
+      "tolerance": 50
+    },
+    {
+      "tag": "direct",
+      "type": "direct"
+    },
+    {
+      "tag": "block",
+      "type": "block"
+    },
+    {
+      "tag": "dns-out",
+      "type": "dns"
+    },
+   
+    {
+      "server": "147.45.76.99",
+      "server_port": 443,
+      "tls": {
+        "enabled": true,
+        "insecure": true
+      },
+      "password": "cef1e7a47565b431",
+      "obfs": {
+        "type": "salamander",
+        "password": "2c5ef5135559d4f5"
+      },
+      "tag": "A1",
+      "type": "hysteria2"
+    },
+    {
+      "server": "[2a12:5940:42c5::2]",
+      "server_port": 443,
+      "tls": {
+        "enabled": true,
+        "insecure": true
+      },
+      "password": "cef1e7a47565b431",
+      "obfs": {
+        "type": "salamander",
+        "password": "2c5ef5135559d4f5"
+      },
+      "tag": "A2",
+      "type": "hysteria2"
+    },
+    {        
+	  "server": "147.45.76.180",
+      "server_port": 443,
+      "tls": {
+        "enabled": true,
+        "insecure": true
+      },
+      "password": "d209a78e3272cbeb",
+      "obfs": {
+        "type": "salamander",
+        "password": "b1752cdc49b48a29"
+      },
+      "tag": "A3",
+      "type": "hysteria2"
+    },
+	{
+      "server": "[2a12:5940:431d::2]",
+      "server_port": 443,
+      "tls": {
+        "enabled": true,
+        "insecure": true
+      },
+      "password": "d209a78e3272cbeb",
+      "obfs": {
+        "type": "salamander",
+        "password": "b1752cdc49b48a29"
+      },
+      "tag": "A4",
+      "type": "hysteria2"
+    },
+	{
+      "server": "147.45.76.116",
+      "server_port": 443,
+      "tls": {
+        "enabled": true,
+        "insecure": true
+      },
+      "password": "7929508208061157",
+      "obfs": {
+        "type": "salamander",
+        "password": "6cc525a9a7a2eb6c"
+      },
+      "tag": "A5",
+      "type": "hysteria2"
+    },
+	{
+      "server": "[2a12:5940:42d8::2]",
+      "server_port": 443,
+      "tls": {
+        "enabled": true,
+        "insecure": true
+      },
+      "password": "7929508208061157",
+      "obfs": {
+        "type": "salamander",
+        "password": "6cc525a9a7a2eb6c"
+      },
+      "tag": "A6",
+      "type": "hysteria2"
+    }
+  ],
+  "route": {
+    "geoip": {
+            "download_url": "https://github.com/chocolate4u/Iran-sing-box-rules/releases/latest/download/geoip.db",
+            "download_detour": "direct"
+        },
+        "geosite": {
+            "download_url": "https://github.com\/chocolate4u/Iran-sing-box-rules/releases/latest/download/geosite.db",
+            "download_detour": "direct"
+        },
+    "rules": [
+      {
+        "protocol": "dns",
+        "outbound": "dns-out"
+      },
+      {
+        "network": "udp",
+        "port": 443,
+        "outbound": "block"
+      },
+      {
+        "clash_mode": "direct",
+        "outbound": "direct"
+      },
+      {
+        "clash_mode": "global",
+        "outbound": "select"
+      },
+            {
+                "domain_suffix": [
+                    "ir"
+                ],
+                "outbound": "direct"
+            },
+            {
+                "geoip": [
+                    "ir",
+                    "private",
+                    "arvancloud"
+                ],
+                "outbound": "direct"
+            },
+            {
+                "geosite": [
+                    "ir"
+                ],
+                "outbound": "direct"
+            },
+            {
+                "geosite": [
+                    "malware",
+                    "phishing",
+                    "cryptominers"
+                ],
+                "outbound": "block"
+            },
+            {
+                "geosite": [
+                    "other"
+                ],
+                "outbound": "direct"
+            },
+            {
+                "geoip": [
+                    "malware",
+                    "phishing"
+                ],
+                "outbound": "block"
+            }
+
+    ],
+    "auto_detect_interface": true,
+    "final": "select"
+  },
+  "experimental": {
+    "clash_api": {
+  "external_controller": "127.0.0.1:9090",
+  "external_ui": "",
+  "external_ui_download_url": "",
+  "external_ui_download_detour": "",
+  "secret":"",
+  "default_mode": ""
+
+    }
+  }
+}
