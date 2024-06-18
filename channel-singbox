@@ -1,155 +1,163 @@
 {
   "log": {
-    "disabled": false,
-    "level": "info",
+    "level": "warn",
+    "output": "box.log",
     "timestamp": true
   },
   "dns": {
+      "fakeip": {
+      "enabled": true,
+      "inet4_range": "198.18.0.0/15",
+      "inet6_range": "fc00::/18"
+    }, 
     "servers": [
       {
-        "tag": "proxyDns",
-        "address": "1.1.1.1",
-        "detour": "select"
+        "tag": "dns-remote",
+        "address": "udp://1.1.1.1",
+        "address_resolver": "dns-direct"
       },
       {
-        "tag": "localDns",
-        "address": "https://223.5.5.5/dns-query",
+        "tag": "dns-direct",
+        "address": "1.1.1.1",
+        "address_resolver": "dns-local",
         "detour": "direct"
       },
       {
-        "tag": "block",
+        "tag": "dns-local",
+        "address": "local",
+        "detour": "direct"
+      },
+      {
+        "tag": "dns-block",
         "address": "rcode://success"
       }
     ],
     "rules": [
-            {
-                "domain_suffix": [
-                    ".ir"
-                ],
-                "server": "dns-direct"
-            },
-
       {
-        "server": "localDns",
-        "outbound": "any",
-        "disable_cache": true
+        "domain_suffix": ".ir",
+        "geosite": "ir",
+        "server": "dns-direct"
       },
       {
-        "server": "localDns",
-        "clash_mode": "direct"
-      },
-      {
-        "server": "proxyDns",
-        "clash_mode": "global"
+        "domain": "http://cp.cloudflare.com",
+        "server": "dns-remote",
+        "rewrite_ttl": 3000
       }
-
     ],
-    "strategy": "ipv4_only"
+    "final": "dns-remote",
+    "independent_cache": true
   },
   "inbounds": [
     {
+      "type": "tun",
+      "tag": "tun-in",
+      "mtu": 9000,
+      "inet4_address": "172.19.0.1/28",
+      "inet6_address": "fdfe:dcba:9876::1/126",
+      "auto_route": true,
+      "strict_route": true,
+      "endpoint_independent_nat": true,
+      "stack": "mixed",
       "sniff": true,
-      "type": "mixed",
-      "listen": "127.0.0.1",
-      "listen_port": 1081
+      "sniff_override_destination": true
     },
     {
-      "stack": "system",
-      "auto_route": true,
-      "inet4_address": "172.19.0.1/30",
-      "mtu": 9000,
+      "type": "mixed",
+      "tag": "mixed-in",
+      "listen": "127.0.0.1",
+      "listen_port": 2334,
       "sniff": true,
-      "strict_route": true,
-      "type": "tun",
-      "platform": {
-        "http_proxy": {
-          "enabled": true,
-          "server": "127.0.0.1",
-          "server_port": 1081
-        }
-      }
+      "sniff_override_destination": true
+    },
+    {
+      "type": "direct",
+      "tag": "dns-in",
+      "listen": "127.0.0.1",
+      "listen_port": 6450,
+      "override_address": "1.1.1.1",
+      "override_port": 53
     }
   ],
   "outbounds": [
     {
-      "tag": "select",
       "type": "selector",
+      "tag": "select",
       "outbounds": [
         "auto",
         "A1",
         "A2",
         "A3",
 		"A4",
-		"A5",
-		"A6",
+        "A5",
+        "A6",
 		"A7",
-		"A8",
-    "A9",
-    "A10",
-    "A11",
-    "A12"
-      ]
+        "A8",
+        "A9",
+	    "A10",
+        "A11",
+        "A12",
+		"A13",
+        "A14",
+        "A15",
+		"A16",
+		"WARP-MAIN",
+        "WARP-WIW"
+      ],
+      "default": "auto"
     },
     {
-      "tag": "auto",
       "type": "urltest",
+      "tag": "auto",
       "outbounds": [
         "A1",
         "A2",
         "A3",
 		"A4",
-		"A5",
-		"A6",
+        "A5",
+        "A6",
 		"A7",
-		"A8",
-    "A9",
-    "A10",
-    "A11",
-    "A12"
-	  ],
-      "url": "https://www.gstatic.com/generate_204",
-      "interval": "1m",
-      "tolerance": 50
+        "A8",
+        "A9",
+	    "A10",
+        "A11",
+        "A12",
+		"A13",
+        "A14",
+        "A15",
+		"A16",
+		"WARP-MAIN",
+        "WARP-WIW"
+      ],
+      "url": "http://cp.cloudflare.com/",
+      "interval": "10m0s",
+      "idle_timeout": "1h40m0s"
     },
-    {
-      "tag": "direct",
-      "type": "direct"
-    },
-    {
-      "tag": "block",
-      "type": "block"
-    },
-    {
-      "tag": "dns-out",
-      "type": "dns"
-    },
-   
-    {
-      "server": "147.45.76.99",
-      "server_port": 443,
+	{
+      "server": "77.221.152.43",
+      "server_port": 38281,
       "tls": {
         "enabled": true,
         "insecure": true
       },
-      "password": "cef1e7a47565b431",
+      "password": "4d83a87bc8debbbb",
       "obfs": {
         "type": "salamander",
-        "password": "2c5ef5135559d4f5"
+        "password": "83c4eb0cda31a9a1"
       },
       "tag": "A1",
       "type": "hysteria2"
     },
     {
-      "server": "[2a12:5940:42c5::2]",
-      "server_port": 443,
+      "server": "[2a0b:4140:55cf::2]",
+      "server_port": 38281,
       "tls": {
         "enabled": true,
         "insecure": true
       },
-      "password": "cef1e7a47565b431",
+      "password": "4d83a87bc8debbbb",
       "obfs": {
         "type": "salamander",
-        "password": "2c5ef5135559d4f5"
+        "password": "83c4eb0cda31a9a1"
       },
       "tag": "A2",
       "type": "hysteria2"
@@ -214,7 +222,41 @@
       "tag": "A6",
       "type": "hysteria2"
     },
-  {
+    {
+      "server": "77.221.152.43",
+      "server_port": 28211,
+      "uuid": "cf2b1e57-3831-4796-87c4-0829735b1f33",
+    "password": "4bb344e1f9855355",
+      "congestion_control": "bbr",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+    "alpn": [
+      "h3",
+      "spdy/3.1"
+    ]
+      },
+      "tag": "A7",
+      "type": "tuic"
+    },
+    {
+      "server": "[2a0b:4140:55cf::2]",
+      "server_port": 28211,
+      "uuid": "cf2b1e57-3831-4796-87c4-0829735b1f33",
+    "password": "4bb344e1f9855355",
+      "congestion_control": "bbr",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+    "alpn": [
+      "h3",
+      "spdy/3.1"
+    ]
+      },
+      "tag": "A8",
+      "type": "tuic"
+    },
+    {
       "server": "147.45.76.180",
       "server_port": 29393,
       "uuid": "c3c8a581-25c3-41a8-95bd-0188f63748b9",
@@ -228,10 +270,10 @@
       "spdy/3.1"
     ]
       },
-      "tag": "A7",
+      "tag": "A9",
       "type": "tuic"
     },
-  {
+    {
       "server": "[2a12:5940:431d::2]",
       "server_port": 29393,
       "uuid": "c3c8a581-25c3-41a8-95bd-0188f63748b9",
@@ -245,44 +287,44 @@
       "spdy/3.1"
     ]
       },
-      "tag": "A8",
-      "type": "tuic"
-    },
-  {
-      "server": "147.45.76.99",
-      "server_port": 48282,
-      "uuid": "6801db4e-76d9-4a3e-acdc-9ebdd1dd4e86",
-    "password": "c515252362b009f5",
-      "congestion_control": "bbr",
-      "tls": {
-        "enabled": true,
-        "insecure": true,
-    "alpn": [
-      "h3",
-      "spdy/3.1"
-    ]
-      },
-      "tag": "A9",
-      "type": "tuic"
-    },
-  {
-      "server": "[2a12:5940:42c5::2]",
-      "server_port": 48282,
-      "uuid": "6801db4e-76d9-4a3e-acdc-9ebdd1dd4e86",
-    "password": "c515252362b009f5",
-      "congestion_control": "bbr",
-      "tls": {
-        "enabled": true,
-        "insecure": true,
-    "alpn": [
-      "h3",
-      "spdy/3.1"
-    ]
-      },
       "tag": "A10",
       "type": "tuic"
     },
-  {
+    {
+      "server": "77.221.152.43",
+      "server_port": 28211,
+      "uuid": "cf2b1e57-3831-4796-87c4-0829735b1f33",
+    "password": "4bb344e1f9855355",
+      "congestion_control": "bbr",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+    "alpn": [
+      "h3",
+      "spdy/3.1"
+    ]
+      },
+      "tag": "A11",
+      "type": "tuic"
+    },
+    {
+      "server": "[2a0b:4140:55cf::2]",
+      "server_port": 28211,
+      "uuid": "cf2b1e57-3831-4796-87c4-0829735b1f33",
+    "password": "4bb344e1f9855355",
+      "congestion_control": "bbr",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+    "alpn": [
+      "h3",
+      "spdy/3.1"
+    ]
+      },
+      "tag": "A12",
+      "type": "tuic"
+    },
+    {
       "server": "147.45.76.116",
       "server_port": 54833,
       "uuid": "eec22c1c-2e37-4c66-b7a9-41cf43033070",
@@ -296,10 +338,10 @@
       "spdy/3.1"
     ]
       },
-      "tag": "A11",
+      "tag": "A13",
       "type": "tuic"
     },
-  {
+    {
       "server": "[2a12:5940:42d8::2]",
       "server_port": 54833,
       "uuid": "eec22c1c-2e37-4c66-b7a9-41cf43033070",
@@ -313,93 +355,152 @@
       "spdy/3.1"
     ]
       },
-      "tag": "A12",
+      "tag": "A14",
       "type": "tuic"
+    },
+	{
+      "type": "wireguard",
+      "server": "162.159.192.121",
+      "server_port": 8886,
+      "local_address": [
+          "172.16.0.2/32",
+          "2606:4700:110:83d5:b153:a1ec:f7a4:7d83/128"
+      ],
+      "private_key": "0D6uRan8wP5qYdni4hF/Vs/heLM5gT3GUgEYGPhO3l4=",
+      "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
+      "reserved": [
+          213,
+          116,
+          42
+      ],
+      "mtu": 1384,
+      "workers": 2,
+      "detour": "direct",
+      "tag": "WARP-MAIN"
+    },
+	{
+      "type": "wireguard",
+      "server": "188.114.99.135",
+      "server_port": 1180,
+      "local_address": [
+          "172.16.0.2/32",
+          "2606:4700:110:83d5:b153:a1ec:f7a4:7d83/128"
+      ],
+      "private_key": "mOhCw+Qib5kinGboORTUqC/fcSBxCLPN8TLSMC6eLmQ=",
+      "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
+      "reserved": [
+          219,
+          72,
+          92
+      ],
+      "mtu": 1384,
+      "workers": 2,
+      "detour": "WARP-MAIN",
+      "tag": "WARP-WIW"
+    },
+    {
+      "type": "dns",
+      "tag": "dns-out"
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "direct",
+      "tag": "bypass"
+    },
+    {
+      "type": "block",
+      "tag": "block"
     }
   ],
-  "route": {
-    "geoip": {
-            "download_url": "https://github.com/chocolate4u/Iran-sing-box-rules/releases/latest/download/geoip.db",
-            "download_detour": "direct"
-        },
-        "geosite": {
-            "download_url": "https://github.com\/chocolate4u/Iran-sing-box-rules/releases/latest/download/geosite.db",
-            "download_detour": "direct"
-        },
+  "route":{
+      "rule_set":[
+         {
+            "tag":"geoip-ir",
+            "type":"remote",
+            "format":"binary",
+            "download_detour":"select",
+            "update_interval":"1d",
+            "url":"https://cdn.jsdelivr.net/gh/chocolate4u/Iran-sing-box-rules@rule-set/geoip-ir.srs"
+         },
+         {
+            "tag":"geosite-ir",
+            "type":"remote",
+            "format":"binary",
+            "download_detour":"select",
+            "update_interval":"1d",
+            "url":"https://cdn.jsdelivr.net/gh/chocolate4u/Iran-sing-box-rules@rule-set/geosite-ir.srs"
+         },
+         {
+            "tag":"geosite-category-ads-all",
+            "type":"remote",
+            "format":"binary",
+            "download_detour":"select",
+            "update_interval":"1d",
+            "url":"https://cdn.jsdelivr.net/gh/chocolate4u/Iran-sing-box-rules@rule-set/geosite-category-ads-all.srs"
+         }
+      ],
     "rules": [
-      {
-        "protocol": "dns",
+	  {
+        "inbound": "dns-in",
         "outbound": "dns-out"
       },
       {
-        "network": "udp",
-        "port": 443,
-        "outbound": "block"
+        "port": 53,
+        "outbound": "dns-out"
       },
       {
-        "clash_mode": "direct",
+        "clash_mode": "Direct",
         "outbound": "direct"
       },
       {
-        "clash_mode": "global",
+            "rule_set":[
+               "geoip-ir",
+               "geosite-ir"
+            ],
+            "outbound":"direct"
+         },
+       { 
+          "ip_is_private":true,
+          "outbound":"direct"},
+         {
+          "process_name":[
+          "nearby_share.exe"
+          ],
+           "outbound":"direct"
+          },
+         {
+          "package_name":[
+           "http://com.google.android.gms.nearby"
+             ],
+          "outbound":"direct"
+          },
+         {
+            "rule_set":[
+               "geosite-category-ads-all"         
+           ],
+            "outbound":"block"
+         },
+      {
+        "clash_mode": "Global",
         "outbound": "select"
-      },
-            {
-                "domain_suffix": [
-                    "ir"
-                ],
-                "outbound": "direct"
-            },
-            {
-                "geoip": [
-                    "ir",
-                    "private",
-                    "arvancloud"
-                ],
-                "outbound": "direct"
-            },
-            {
-                "geosite": [
-                    "ir"
-                ],
-                "outbound": "direct"
-            },
-            {
-                "geosite": [
-                    "malware",
-                    "phishing",
-                    "cryptominers"
-                ],
-                "outbound": "block"
-            },
-            {
-                "geosite": [
-                    "other"
-                ],
-                "outbound": "direct"
-            },
-            {
-                "geoip": [
-                    "malware",
-                    "phishing"
-                ],
-                "outbound": "block"
-            }
-
+      }
     ],
+    "final": "select",
     "auto_detect_interface": true,
-    "final": "select"
+    "override_android_vpn": true
   },
   "experimental": {
     "clash_api": {
   "external_controller": "127.0.0.1:9090",
   "external_ui": "",
   "external_ui_download_url": "",
-  "external_ui_download_detour": "",
+  "external_ui_download_detour": "select",
   "secret":"",
-  "default_mode": ""
+  "default_mode": "rule"
 
     }
   }
 }
-
