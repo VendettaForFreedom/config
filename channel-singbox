@@ -32,18 +32,6 @@
         "address": "rcode://success"
       }
     ],
-    "rules": [
-      {
-        "domain_suffix": ".ir",
-        "geosite": "ir",
-        "server": "dns-direct"
-      },
-      {
-        "domain": "http://cp.cloudflare.com",
-        "server": "dns-remote",
-        "rewrite_ttl": 3000
-      }
-    ],
     "final": "dns-remote",
     "independent_cache": true
   },
@@ -412,78 +400,6 @@
     }
   ],
   "route":{
-      "rule_set":[
-         {
-            "tag":"geoip-ir",
-            "type":"remote",
-            "format":"binary",
-            "download_detour":"select",
-            "update_interval":"1d",
-            "url":"https://cdn.jsdelivr.net/gh/chocolate4u/Iran-sing-box-rules@rule-set/geoip-ir.srs"
-         },
-         {
-            "tag":"geosite-ir",
-            "type":"remote",
-            "format":"binary",
-            "download_detour":"select",
-            "update_interval":"1d",
-            "url":"https://cdn.jsdelivr.net/gh/chocolate4u/Iran-sing-box-rules@rule-set/geosite-ir.srs"
-         },
-         {
-            "tag":"geosite-category-ads-all",
-            "type":"remote",
-            "format":"binary",
-            "download_detour":"select",
-            "update_interval":"1d",
-            "url":"https://cdn.jsdelivr.net/gh/chocolate4u/Iran-sing-box-rules@rule-set/geosite-category-ads-all.srs"
-         }
-      ],
-    "rules": [
-	  {
-        "inbound": "dns-in",
-        "outbound": "dns-out"
-      },
-      {
-        "port": 53,
-        "outbound": "dns-out"
-      },
-      {
-        "clash_mode": "Direct",
-        "outbound": "direct"
-      },
-      {
-            "rule_set":[
-               "geoip-ir",
-               "geosite-ir"
-            ],
-            "outbound":"direct"
-         },
-       { 
-          "ip_is_private":true,
-          "outbound":"direct"},
-         {
-          "process_name":[
-          "nearby_share.exe"
-          ],
-           "outbound":"direct"
-          },
-         {
-          "package_name":[
-           "http://com.google.android.gms.nearby"
-             ],
-          "outbound":"direct"
-          },
-         {
-            "rule_set":[
-               "geosite-category-ads-all"         
-           ],
-            "outbound":"block"
-         },
-      {
-        "clash_mode": "Global",
-        "outbound": "select"
-      }
-    ],
     "final": "select",
     "auto_detect_interface": true,
     "override_android_vpn": true
