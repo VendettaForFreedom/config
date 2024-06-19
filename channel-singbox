@@ -84,8 +84,6 @@
 	    "A10",
         "A11",
         "A12",
-		"A13",
-        "A14",
 		"WARP-MAIN",
         "WARP-WIW"
       ],
@@ -107,8 +105,6 @@
 	    "A10",
         "A11",
         "A12",
-		"A13",
-        "A14",
 		"WARP-MAIN",
         "WARP-WIW"
       ],
@@ -275,40 +271,6 @@
       "type": "tuic"
     },
     {
-      "server": "77.221.152.43",
-      "server_port": 28211,
-      "uuid": "cf2b1e57-3831-4796-87c4-0829735b1f33",
-    "password": "4bb344e1f9855355",
-      "congestion_control": "bbr",
-      "tls": {
-        "enabled": true,
-        "insecure": true,
-    "alpn": [
-      "h3",
-      "spdy/3.1"
-    ]
-      },
-      "tag": "A11",
-      "type": "tuic"
-    },
-    {
-      "server": "[2a0b:4140:55cf::2]",
-      "server_port": 28211,
-      "uuid": "cf2b1e57-3831-4796-87c4-0829735b1f33",
-    "password": "4bb344e1f9855355",
-      "congestion_control": "bbr",
-      "tls": {
-        "enabled": true,
-        "insecure": true,
-    "alpn": [
-      "h3",
-      "spdy/3.1"
-    ]
-      },
-      "tag": "A12",
-      "type": "tuic"
-    },
-    {
       "server": "147.45.76.116",
       "server_port": 54833,
       "uuid": "eec22c1c-2e37-4c66-b7a9-41cf43033070",
@@ -322,7 +284,7 @@
       "spdy/3.1"
     ]
       },
-      "tag": "A13",
+      "tag": "A11",
       "type": "tuic"
     },
     {
@@ -339,7 +301,7 @@
       "spdy/3.1"
     ]
       },
-      "tag": "A14",
+      "tag": "A12",
       "type": "tuic"
     },
 	{
