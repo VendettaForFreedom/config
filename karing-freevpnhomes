@@ -1,0 +1,422 @@
+{
+  "log": {
+    "level": "warn",
+    "output": "box.log",
+    "timestamp": true
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "dns-remote",
+        "address": "udp://1.1.1.1",
+        "address_resolver": "dns-direct"
+      },
+      {
+        "tag": "dns-trick-direct",
+        "address": "https://sky.rethinkdns.com/",
+        "detour": "direct-fragment"
+      },
+      {
+        "tag": "dns-direct",
+        "address": "1.1.1.1",
+        "address_resolver": "dns-local",
+        "detour": "direct"
+      },
+      {
+        "tag": "dns-local",
+        "address": "local",
+        "detour": "direct"
+      },
+      {
+        "tag": "dns-block",
+        "address": "rcode://success"
+      }
+    ],
+    "rules": [
+      {
+        "domain": [
+          "[2a12:5940:9ab8::2]",
+          "[2a12:5940:aa9a::2]",
+          "[2a12:5940:777f::2]",
+          "[2a12:5940:9794::2]"
+        ],
+        "server": "dns-direct"
+      },
+      {
+        "domain": "cp.cloudflare.com",
+        "server": "dns-remote",
+        "rewrite_ttl": 3000
+      },
+      {
+        "rule_set": [
+          "geoip-ir",
+          "geosite-ir"
+        ],
+        "server": "dns-direct"
+      }
+    ],
+    "final": "dns-remote",
+    "static_ips": {
+      "sky.rethinkdns.com": [
+        "104.17.148.22",
+        "104.17.147.22",
+        "188.114.99.0",
+        "188.114.98.0"
+      ]
+    }
+  },
+  "inbounds": [
+    {
+      "type": "mixed",
+      "tag": "mixed-in",
+      "listen": "127.0.0.1",
+      "listen_port": 12334,
+      "sniff": true,
+      "sniff_override_destination": true
+    },
+    {
+      "type": "direct",
+      "tag": "dns-in",
+      "listen": "127.0.0.1",
+      "listen_port": 16450
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "selector",
+      "tag": "select",
+      "outbounds": [
+        "auto",
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "A5",
+        "A6",
+        "A7",
+        "A8",
+        "A9",
+        "A10",
+        "A11",
+        "A12",
+        "WARP-MAIN",
+        "WARP-WIW"
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "urltest",
+      "tag": "auto",
+      "outbounds": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "A5",
+        "A6",
+        "A7",
+        "A8",
+        "A9",
+        "A10",
+        "A11",
+        "A12",
+        "WARP-MAIN",
+        "WARP-WIW"
+      ],
+      "url": "http://connectivitycheck.gstatic.com/generate_204"
+    },
+    {
+      "type": "hysteria2",
+      "tag": "A1",
+      "server": "77.91.77.27",
+      "server_port": 39292,
+      "obfs": {
+        "type": "salamander",
+        "password": "5449c086723e86d4"
+      },
+      "password": "f0126e9fe4014e17",
+      "tls": {
+        "enabled": true,
+        "insecure": true
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "A2",
+      "server": "[2a12:5940:9794::2]",
+      "server_port": 39292,
+      "obfs": {
+        "type": "salamander",
+        "password": "5449c086723e86d4"
+      },
+      "password": "f0126e9fe4014e17",
+      "tls": {
+        "enabled": true,
+        "insecure": true
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "A3",
+      "server": "77.91.77.87",
+      "server_port": 37383,
+      "obfs": {
+        "type": "salamander",
+        "password": "f809a60274316cdd"
+      },
+      "password": "4eb5646f51e94a84",
+      "tls": {
+        "enabled": true,
+        "insecure": true
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "A4",
+      "server": "[2a12:5940:9ab8::2]",
+      "server_port": 37383,
+      "obfs": {
+        "type": "salamander",
+        "password": "f809a60274316cdd"
+      },
+      "password": "4eb5646f51e94a84",
+      "tls": {
+        "enabled": true,
+        "insecure": true
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "A5",
+      "server": "77.91.77.187",
+      "server_port": 47388,
+      "obfs": {
+        "type": "salamander",
+        "password": "15a519691a16a5d8"
+      },
+      "password": "f65c122897be1bff",
+      "tls": {
+        "enabled": true,
+        "insecure": true
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "A6",
+      "server": "[2a12:5940:aa9a::2]",
+      "server_port": 47388,
+      "obfs": {
+        "type": "salamander",
+        "password": "15a519691a16a5d8"
+      },
+      "password": "f65c122897be1bff",
+      "tls": {
+        "enabled": true,
+        "insecure": true
+      }
+    },
+    {
+      "type": "tuic",
+      "tag": "A7",
+      "server": "77.91.77.27",
+      "server_port": 39299,
+      "uuid": "72b15e67-6ae5-42ba-9518-2258d5bb300f",
+      "password": "cc5ce5f8e279f9ee",
+      "congestion_control": "bbr",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "alpn": [
+          "h3",
+          "spdy/3.1"
+        ]
+      }
+    },
+    {
+      "type": "tuic",
+      "tag": "A8",
+      "server": "[2a12:5940:9794::2]",
+      "server_port": 39299,
+      "uuid": "72b15e67-6ae5-42ba-9518-2258d5bb300f",
+      "password": "cc5ce5f8e279f9ee",
+      "congestion_control": "bbr",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "alpn": [
+          "h3",
+          "spdy/3.1"
+        ]
+      }
+    },
+    {
+      "type": "tuic",
+      "tag": "A9",
+      "server": "77.91.77.87",
+      "server_port": 38382,
+      "uuid": "2999e665-fa4e-498f-8417-4ab567010ed6",
+      "password": "aa69e32eae500e1c",
+      "congestion_control": "bbr",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "alpn": [
+          "h3",
+          "spdy/3.1"
+        ]
+      }
+    },
+    {
+      "type": "tuic",
+      "tag": "A10",
+      "server": "[2a12:5940:9ab8::2]",
+      "server_port": 38382,
+      "uuid": "2999e665-fa4e-498f-8417-4ab567010ed6",
+      "password": "aa69e32eae500e1c",
+      "congestion_control": "bbr",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "alpn": [
+          "h3",
+          "spdy/3.1"
+        ]
+      }
+    },
+    {
+      "type": "tuic",
+      "tag": "A11",
+      "server": "77.91.77.187",
+      "server_port": 38383,
+      "uuid": "a223d4ab-2355-46e6-a455-e95ed843991a",
+      "password": "ae8e511e0d7b5a49",
+      "congestion_control": "bbr",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "alpn": [
+          "h3",
+          "spdy/3.1"
+        ]
+      }
+    },
+    {
+      "type": "tuic",
+      "tag": "A12",
+      "server": "[2a12:5940:aa9a::2]",
+      "server_port": 38383,
+      "uuid": "a223d4ab-2355-46e6-a455-e95ed843991a",
+      "password": "ae8e511e0d7b5a49",
+      "congestion_control": "bbr",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "alpn": [
+          "h3",
+          "spdy/3.1"
+        ]
+      }
+    },
+    {
+      "type": "wireguard",
+      "tag": "WARP-MAIN",
+      "detour": "direct",
+      "local_address": [
+        "172.16.0.2/32",
+        "2606:4700:110:83d5:b153:a1ec:f7a4:7d83/128"
+      ],
+      "private_key": "0D6uRan8wP5qYdni4hF/Vs/heLM5gT3GUgEYGPhO3l4=",
+      "server": "162.159.192.121",
+      "server_port": 8886,
+      "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
+      "reserved": "1XQq",
+      "workers": 2,
+      "mtu": 1334
+    },
+    {
+      "type": "wireguard",
+      "tag": "WARP-WIW",
+      "detour": "WARP-MAIN",
+      "local_address": [
+        "172.16.0.2/32",
+        "2606:4700:110:83d5:b153:a1ec:f7a4:7d83/128"
+      ],
+      "private_key": "mOhCw+Qib5kinGboORTUqC/fcSBxCLPN8TLSMC6eLmQ=",
+      "server": "188.114.99.135",
+      "server_port": 1180,
+      "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
+      "reserved": "20hc",
+      "workers": 2,
+      "mtu": 1334
+    },
+    {
+      "type": "dns",
+      "tag": "dns-out"
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "direct",
+      "tag": "direct-fragment",
+      "tls_fragment": {
+        "enabled": true
+      }
+    },
+    {
+      "type": "direct",
+      "tag": "bypass"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "rule_set": [
+          "geoip-ir",
+          "geosite-ir"
+        ],
+        "outbound": "direct"
+      },
+      {
+        "inbound": "dns-in",
+        "outbound": "dns-out"
+      },
+      {
+        "port": 53,
+        "outbound": "dns-out"
+      },
+      {
+        "clash_mode": "Direct",
+        "outbound": "direct"
+      },
+      {
+        "clash_mode": "Global",
+        "outbound": "select"
+      }
+    ],
+    "rule_set": [
+      {
+        "type": "remote",
+        "tag": "geoip-ir",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/country/geoip-ir.srs",
+        "update_interval": "120h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "geosite-ir",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/country/geosite-ir.srs",
+        "update_interval": "120h0m0s"
+      }
+    ],
+    "final": "select",
+    "auto_detect_interface": true,
+    "override_android_vpn": true
+  }
+}
