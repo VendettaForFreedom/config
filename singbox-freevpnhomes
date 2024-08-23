@@ -32,7 +32,7 @@
                 "domain_suffix": ".ir",
                 "server": "dns-direct",
                 "domain": [
-                    "8f637407.new-bpb-worker-panel-4qa.pages.dev",
+                    "2e9bc800.new-bpb-worker-panel-drk.pages.dev",
                     "www.speedtest.net"
                 ]
             },
@@ -98,6 +98,10 @@
 	            "A10",
                 "A11",
                 "A12",
+				"A13",
+	            "A14",
+                "A15",
+                "A16",
 	        	"WARP-MAIN",
                 "WARP-WIW"
             ]
@@ -118,6 +122,10 @@
 	            "A10",
                 "A11",
                 "A12",
+				"A13",
+	            "A14",
+                "A15",
+                "A16",
 	        	"WARP-MAIN",
                 "WARP-WIW"
             ],
@@ -228,6 +236,36 @@
 		  }
 		},
 		{
+			  "type": "hysteria2",
+			  "tag": "A7",
+			  "server": "77.221.158.52",
+			  "server_port": 7373,
+			  "obfs": {
+				"type": "salamander",
+				"password": "7d9dff369a11f6e0"
+			  },
+			  "password": "81ea378b37931b23",
+			  "tls": {
+				"enabled": true,
+				"insecure": true
+		  }
+		},
+		{
+			  "type": "hysteria2",
+			  "tag": "A8",
+			  "server": "[2a12:5940:72da::2]",
+			  "server_port": 7373,
+			  "obfs": {
+				"type": "salamander",
+				"password": "7d9dff369a11f6e0"
+			  },
+			  "password": "81ea378b37931b23",
+			  "tls": {
+				"enabled": true,
+				"insecure": true
+		  }
+		},
+		{
 			  "server": "77.91.77.27",
 			  "server_port": 39299,
 			  "uuid": "72b15e67-6ae5-42ba-9518-2258d5bb300f",
@@ -241,7 +279,7 @@
 					"spdy/3.1"
 				]
 			  },
-			  "tag": "A7",
+			  "tag": "A9",
 			  "type": "tuic"
 		},
 		{
@@ -258,7 +296,7 @@
 					"spdy/3.1"
 				]
 			  },
-			  "tag": "A8",
+			  "tag": "A10",
 			  "type": "tuic"
 		},
 		{
@@ -275,7 +313,7 @@
 					"spdy/3.1"
 				]
 			  },
-			  "tag": "A9",
+			  "tag": "A11",
 			  "type": "tuic"
 		},
 		{
@@ -292,7 +330,7 @@
 					"spdy/3.1"
 				]
 			  },
-			  "tag": "A10",
+			  "tag": "A12",
 			  "type": "tuic"
 		},
 		{
@@ -309,7 +347,7 @@
 					"spdy/3.1"
 				]
 			  },
-			  "tag": "A11",
+			  "tag": "A13",
 			  "type": "tuic"
 		},
 		{
@@ -326,7 +364,41 @@
 					"spdy/3.1"
 				]
 			  },
-			  "tag": "A12",
+			  "tag": "A14",
+			  "type": "tuic"
+		},
+		{
+			  "server": "77.221.158.52",
+			  "server_port": 8922,
+			  "uuid": "2f2dada7-b8af-49e7-a26e-d2d592c82846",
+			  "password": "734da957528baa43",
+			  "congestion_control": "bbr",
+			  "tls": {
+				"enabled": true,
+				"insecure": true,
+				"alpn": [
+					"h3",
+					"spdy/3.1"
+				]
+			  },
+			  "tag": "A15",
+			  "type": "tuic"
+		},
+		{
+			  "server": "[2a12:5940:72da::2]",
+			  "server_port": 8922,
+			  "uuid": "2f2dada7-b8af-49e7-a26e-d2d592c82846",
+			  "password": "734da957528baa43",
+			  "congestion_control": "bbr",
+			  "tls": {
+				"enabled": true,
+				"insecure": true,
+				"alpn": [
+					"h3",
+					"spdy/3.1"
+				]
+			  },
+			  "tag": "A16",
 			  "type": "tuic"
 		},
 		{
