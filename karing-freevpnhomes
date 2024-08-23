@@ -99,6 +99,10 @@
         "A10",
         "A11",
         "A12",
+		"A13",
+		"A14",
+		"A15",
+		"A16",
         "WARP-MAIN",
         "WARP-WIW"
       ],
@@ -120,6 +124,10 @@
         "A10",
         "A11",
         "A12",
+		"A13",
+		"A14",
+		"A15",
+		"A16",
         "WARP-MAIN",
         "WARP-WIW"
       ],
@@ -215,9 +223,39 @@
         "insecure": true
       }
     },
+	{
+	  "type": "hysteria2",
+	  "tag": "A7",
+	  "server": "77.221.158.52",
+	  "server_port": 7373,
+	  "obfs": {
+		"type": "salamander",
+		"password": "7d9dff369a11f6e0"
+	  },
+	  "password": "81ea378b37931b23",
+	  "tls": {
+		"enabled": true,
+		"insecure": true
+	  }
+	},
+	{
+	  "type": "hysteria2",
+	  "tag": "A8",
+	  "server": "[2a12:5940:72da::2]",
+	  "server_port": 7373,
+	  "obfs": {
+		"type": "salamander",
+		"password": "7d9dff369a11f6e0"
+	  },
+	  "password": "81ea378b37931b23",
+	  "tls": {
+		"enabled": true,
+		"insecure": true
+	  }
+	},
     {
       "type": "tuic",
-      "tag": "A7",
+      "tag": "A9",
       "server": "77.91.77.27",
       "server_port": 39299,
       "uuid": "72b15e67-6ae5-42ba-9518-2258d5bb300f",
@@ -234,7 +272,7 @@
     },
     {
       "type": "tuic",
-      "tag": "A8",
+      "tag": "A10",
       "server": "[2a12:5940:9794::2]",
       "server_port": 39299,
       "uuid": "72b15e67-6ae5-42ba-9518-2258d5bb300f",
@@ -251,7 +289,7 @@
     },
     {
       "type": "tuic",
-      "tag": "A9",
+      "tag": "A11",
       "server": "77.91.77.87",
       "server_port": 38382,
       "uuid": "2999e665-fa4e-498f-8417-4ab567010ed6",
@@ -268,7 +306,7 @@
     },
     {
       "type": "tuic",
-      "tag": "A10",
+      "tag": "A12",
       "server": "[2a12:5940:9ab8::2]",
       "server_port": 38382,
       "uuid": "2999e665-fa4e-498f-8417-4ab567010ed6",
@@ -285,7 +323,7 @@
     },
     {
       "type": "tuic",
-      "tag": "A11",
+      "tag": "A13",
       "server": "77.91.77.187",
       "server_port": 38383,
       "uuid": "a223d4ab-2355-46e6-a455-e95ed843991a",
@@ -302,7 +340,7 @@
     },
     {
       "type": "tuic",
-      "tag": "A12",
+      "tag": "A14",
       "server": "[2a12:5940:aa9a::2]",
       "server_port": 38383,
       "uuid": "a223d4ab-2355-46e6-a455-e95ed843991a",
@@ -317,6 +355,40 @@
         ]
       }
     },
+	{
+	  "server": "77.221.158.52",
+	  "server_port": 8922,
+	  "uuid": "2f2dada7-b8af-49e7-a26e-d2d592c82846",
+	  "password": "734da957528baa43",
+	  "congestion_control": "bbr",
+	  "tls": {
+		"enabled": true,
+		"insecure": true,
+		"alpn": [
+			"h3",
+			"spdy/3.1"
+		]
+	  },
+	  "tag": "A15",
+	  "type": "tuic"
+	},
+	{
+	  "server": "[2a12:5940:72da::2]",
+	  "server_port": 8922,
+	  "uuid": "2f2dada7-b8af-49e7-a26e-d2d592c82846",
+	  "password": "734da957528baa43",
+	  "congestion_control": "bbr",
+	  "tls": {
+		"enabled": true,
+		"insecure": true,
+		"alpn": [
+			"h3",
+			"spdy/3.1"
+		]
+	  },
+	  "tag": "A16",
+	  "type": "tuic"
+	},
     {
       "type": "wireguard",
       "tag": "WARP-MAIN",
