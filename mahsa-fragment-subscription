@@ -255,3 +255,5 @@ hy2://%40freehomesvpn@103.249.135.41:16396/?insecure=1&sni=www.leader.ir&obfs=sa
 hy2://%40freehomesvpn@[2a01:e5c0:31bc::2]:16396/?insecure=1&sni=www.leader.ir&obfs=salamander&obfs-password=FreeHomesVpn#%F0%9F%92%A5FreeHomesVpn%20hysteria%20%F0%9F%92%A5Ipv6
 hysteria2://%40freehomesvpn@103.249.135.41:16396?security=tls&obfs=salamander&obfs-password=FreeHomesVpn&insecure=1&sni=www.leader.ir#%F0%9F%92%A5FreeHomesVpn%20hysteria%20%F0%9F%92%A5Ipv4
 hysteria2://%40freehomesvpn@[2a01:e5c0:31bc::2]:16396?security=tls&obfs=salamander&obfs-password=FreeHomesVpn&insecure=1&sni=www.leader.ir#%F0%9F%92%A5FreeHomesVpn%20hysteria%20%F0%9F%92%A5Ipv6
+hysteria2://freehomesvpn@103.249.135.41:16396?security=tls&obfs=salamander&obfs-password=freehomesvpn&insecure=1&sni=www.leader.ir#%F0%9F%92%A5FreeHomesVpn%20hysteria%20%F0%9F%92%A5Ipv4
+hysteria2://freehomesvpn@[2a01:e5c0:31bc::2]:16396?security=tls&obfs=salamander&obfs-password=freehomesvpn&insecure=1&sni=www.leader.ir#%F0%9F%92%A5FreeHomesVpn%20hysteria%20%F0%9F%92%A5Ipv6
