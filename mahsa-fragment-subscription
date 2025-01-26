@@ -259,3 +259,7 @@ hysteria2://freehomesvpn@103.249.135.41:16396?security=tls&obfs=salamander&obfs-
 hysteria2://freehomesvpn@[2a01:e5c0:31bc::2]:16396?security=tls&obfs=salamander&obfs-password=freehomesvpn&insecure=1&sni=www.leader.ir#%F0%9F%92%A5FreeHomesVpn%20hysteria%20%F0%9F%92%A5Ipv6
 hysteria2://freehomesvpn@donate.mahsa.homes:16396?security=tls&obfs=salamander&obfs-password=freehomesvpn&insecure=1&sni=www.leader.ir#%F0%9F%92%A5FreeHomesVpn-1%F0%9F%92%A5
 hy2://freehomesvpn@[2a01:e5c0:65a7::2]:16396/?insecure=1&sni=www.leader.ir&obfs=salamander&obfs-password=freehomesvpn#%F0%9F%92%A5FreeHomesVpn%20hysteria%20server%F0%9F%92%A5Ipv6%20s2
+hy2://freehomesvpn@donate1.mahsa.homes:16396/?insecure=1&sni=www.leader.ir&obfs=salamander&obfs-password=freehomesvpn#%F0%9F%92%A5FreeHomesVpn%20hysteria%F0%9F%92%A5server%201
+hy2://freehomesvpn@donate2.mahsa.homes:16396/?insecure=1&sni=www.leader.ir&obfs=salamander&obfs-password=freehomesvpn#%F0%9F%92%A5FreeHomesVpn%20hysteria%F0%9F%92%A5server%202
+hy2://freehomesvpn@donate3.mahsa.homes:16396/?insecure=1&sni=www.leader.ir&obfs=salamander&obfs-password=freehomesvpn#%F0%9F%92%A5FreeHomesVpn%20hysteria%F0%9F%92%A5server%203
+hy2://freehomesvpn@donate4.mahsa.homes:16396/?insecure=1&sni=www.leader.ir&obfs=salamander&obfs-password=freehomesvpn#%F0%9F%92%A5FreeHomesVpn%20hysteria%F0%9F%92%A5Server%204
